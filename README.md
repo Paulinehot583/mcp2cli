@@ -248,7 +248,7 @@ uv run pytest tests/test_token_savings.py -v -s
 
 ## Acknowledgments
 
-This project was inspired by [Kagan Yilmaz's analysis of CLI vs MCP token costs](https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html) and his work on [CLIHub](https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html). His observation that CLI-based tool access is dramatically more token-efficient than native MCP injection was the spark for mcp2cli.
+This project was inspired by [Kagan Yilmaz's analysis of CLI vs MCP token costs](https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html) and his work on [CLIHub](https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html). His observation that CLI-based tool access is dramatically more token-efficient than native MCP injection was the spark for mcp2cli. Where CLIHub generates static CLIs from MCP servers, mcp2cli takes a different approach: it reads schemas at runtime, so there's no codegen step and no rebuild when the server adds or changes tools. It also extends the pattern to OpenAPI specs — any REST API with a spec file gets the same treatment.
 
 ## License
 
