@@ -10,6 +10,10 @@
 
 ---
 
+**Every MCP tool schema costs ~121 tokens — injected on every turn, whether used or not.** A 30-tool server burns 3,619 tokens/turn just on schemas. Three servers? 145,000 tokens over 20 turns before your agent does anything useful.
+
+mcp2cli replaces that with on-demand discovery: `--list` costs ~16 tokens/tool, `--help` ~120 tokens once per tool. **96–99% fewer tokens** across real conversations.
+
 ## Install
 
 ```bash
