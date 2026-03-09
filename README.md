@@ -255,6 +255,18 @@ mcp2cli takes the CLI approach: `--list` returns compact summaries (~16 tokens/t
 
 Both adapters produce the same internal `CommandDef` structure, so the CLI builder and output handling are shared.
 
+## AI Agent Skill
+
+mcp2cli ships with an installable [skill](https://skills.sh) that teaches AI coding agents (Claude Code, Cursor, Codex) how to use it. Once installed, your agent can discover and call any MCP server or OpenAPI endpoint — and even generate new skills from APIs.
+
+```bash
+npx skills add knowsuchagency/mcp2cli --skill mcp2cli
+```
+
+After installing, try prompts like:
+- `mcp2cli --mcp https://mcp.example.com/sse` — interact with an MCP server
+- `mcp2cli create a skill for https://api.example.com/openapi.json` — generate a skill from an API
+
 ## Development
 
 ```bash
