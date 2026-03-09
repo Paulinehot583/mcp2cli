@@ -21,23 +21,18 @@ pip install mcp2cli[mcp]
 
 ## Usage
 
-### OpenAPI mode
+### MCP HTTP/SSE mode
 
 ```bash
-# List all commands from a remote spec
-mcp2cli --spec https://petstore3.swagger.io/api/v3/openapi.json --list
+# Connect to an MCP server over HTTP
+mcp2cli --mcp https://mcp.example.com/sse --list
 
-# Call an endpoint
-mcp2cli --spec ./openapi.json --base-url https://api.example.com list-pets --status available
+# Call a tool
+mcp2cli --mcp https://mcp.example.com/sse search --query "test"
 
-# With auth
-mcp2cli --spec ./spec.json --auth-header "Authorization:Bearer tok_..." create-item --name "Test"
-
-# POST with JSON body from stdin
-echo '{"name": "Fido", "tag": "dog"}' | mcp2cli --spec ./spec.json create-pet --stdin
-
-# Local YAML spec
-mcp2cli --spec ./api.yaml --base-url http://localhost:8000 --list
+# With auth header
+mcp2cli --mcp https://mcp.example.com/sse --auth-header "x-api-key:sk-..." \
+  query --sql "SELECT 1"
 ```
 
 ### MCP stdio mode
@@ -55,15 +50,23 @@ mcp2cli --mcp-stdio "node server.js" --env API_KEY=sk-... --env DEBUG=1 \
   search --query "test"
 ```
 
-### MCP HTTP/SSE mode
+### OpenAPI mode
 
 ```bash
-# Connect to an MCP server over HTTP
-mcp2cli --mcp https://mcp.example.com/sse --list
+# List all commands from a remote spec
+mcp2cli --spec https://petstore3.swagger.io/api/v3/openapi.json --list
 
-# With auth header
-mcp2cli --mcp https://mcp.example.com/sse --auth-header "x-api-key:sk-..." \
-  query --sql "SELECT 1"
+# Call an endpoint
+mcp2cli --spec ./openapi.json --base-url https://api.example.com list-pets --status available
+
+# With auth
+mcp2cli --spec ./spec.json --auth-header "Authorization:Bearer tok_..." create-item --name "Test"
+
+# POST with JSON body from stdin
+echo '{"name": "Fido", "tag": "dog"}' | mcp2cli --spec ./spec.json create-pet --stdin
+
+# Local YAML spec
+mcp2cli --spec ./api.yaml --base-url http://localhost:8000 --list
 ```
 
 ### Output control
