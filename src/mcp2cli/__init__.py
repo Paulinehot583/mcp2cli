@@ -36,6 +36,9 @@ CONFIG_DIR = Path(
     os.environ.get("MCP2CLI_CONFIG_DIR", Path.home() / ".config" / "mcp2cli")
 )
 BAKED_FILE = CONFIG_DIR / "baked.json"
+OPENAPI_METHODS = frozenset(
+    ("get", "post", "put", "delete", "patch", "head", "options", "trace")
+)
 
 
 # ---------------------------------------------------------------------------
@@ -620,8 +623,11 @@ def extract_openapi_commands(spec: dict) -> list[CommandDef]:
     for path, methods in spec.get("paths", {}).items():
         if not isinstance(methods, dict):
             continue
+        path_parameters = methods.get("parameters", [])
+        if not isinstance(path_parameters, list):
+            path_parameters = []
         for method, details in methods.items():
-            if method not in ("get", "post", "put", "delete", "patch"):
+            if method not in OPENAPI_METHODS:
                 continue
             if not isinstance(details, dict):
                 continue
@@ -648,7 +654,21 @@ def extract_openapi_commands(spec: dict) -> list[CommandDef]:
             params: list[ParamDef] = []
 
             # Parameters (path, query, header)
-            for param in details.get("parameters", []):
+            operation_parameters = details.get("parameters", [])
+            if not isinstance(operation_parameters, list):
+                operation_parameters = []
+            merged_parameters: dict[tuple[str, str], dict] = {}
+            parameter_order: list[tuple[str, str]] = []
+            for param in [*path_parameters, *operation_parameters]:
+                if not isinstance(param, dict) or "name" not in param:
+                    continue
+                key = (param.get("in", "query"), param["name"])
+                if key not in merged_parameters:
+                    parameter_order.append(key)
+                merged_parameters[key] = param
+
+            for key in parameter_order:
+                param = merged_parameters[key]
                 schema = param.get("schema", {})
                 py_type, suffix = schema_type_to_python(schema)
                 p = ParamDef(

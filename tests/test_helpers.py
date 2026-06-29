@@ -406,6 +406,92 @@ class TestExtractOpenAPICommands:
         assert len(path_params) == 1
         assert path_params[0].original_name == "petId"
 
+    def test_path_item_params_are_inherited(self):
+        spec = {
+            "openapi": "3.0.3",
+            "paths": {
+                "/pets/{petId}": {
+                    "parameters": [
+                        {
+                            "name": "petId",
+                            "in": "path",
+                            "required": True,
+                            "description": "Path pet ID",
+                            "schema": {"type": "integer"},
+                        }
+                    ],
+                    "get": {
+                        "operationId": "getPet",
+                        "summary": "Get a pet",
+                    },
+                }
+            },
+        }
+
+        cmds = extract_openapi_commands(spec)
+        get_pet = next(c for c in cmds if c.name == "get-pet")
+        path_params = [p for p in get_pet.params if p.location == "path"]
+        assert len(path_params) == 1
+        assert path_params[0].name == "pet-id"
+        assert path_params[0].required is True
+
+    def test_operation_params_override_path_item_params(self):
+        spec = {
+            "openapi": "3.0.3",
+            "paths": {
+                "/pets/{petId}": {
+                    "parameters": [
+                        {
+                            "name": "petId",
+                            "in": "path",
+                            "required": True,
+                            "description": "Path pet ID",
+                            "schema": {"type": "integer"},
+                        }
+                    ],
+                    "get": {
+                        "operationId": "getPet",
+                        "parameters": [
+                            {
+                                "name": "petId",
+                                "in": "path",
+                                "required": True,
+                                "description": "Operation pet ID",
+                                "schema": {"type": "string"},
+                            }
+                        ],
+                    },
+                }
+            },
+        }
+
+        cmds = extract_openapi_commands(spec)
+        get_pet = next(c for c in cmds if c.name == "get-pet")
+        path_params = [p for p in get_pet.params if p.location == "path"]
+        assert len(path_params) == 1
+        assert path_params[0].description == "Operation pet ID"
+        assert path_params[0].python_type is str
+
+    def test_head_options_and_trace_operations(self):
+        spec = {
+            "openapi": "3.0.3",
+            "paths": {
+                "/pets": {
+                    "head": {"operationId": "headPets"},
+                    "options": {"operationId": "optionsPets"},
+                    "trace": {"operationId": "tracePets"},
+                }
+            },
+        }
+
+        cmds = extract_openapi_commands(spec)
+        methods_by_name = {cmd.name: cmd.method for cmd in cmds}
+        assert methods_by_name == {
+            "head-pets": "head",
+            "options-pets": "options",
+            "trace-pets": "trace",
+        }
+
     def test_enum_choices(self, petstore_spec):
         cmds = extract_openapi_commands(petstore_spec)
         list_pets = next(c for c in cmds if c.name == "list-pets")

@@ -57,7 +57,16 @@ def _openapi_to_native_tools(spec: dict) -> list[dict]:
     tools = []
     for path, methods in spec.get("paths", {}).items():
         for method, op in methods.items():
-            if method not in ("get", "post", "put", "delete", "patch"):
+            if method not in (
+                "get",
+                "post",
+                "put",
+                "delete",
+                "patch",
+                "head",
+                "options",
+                "trace",
+            ):
                 continue
             properties = {}
             required = []
