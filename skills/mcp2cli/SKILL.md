@@ -30,6 +30,9 @@ mcp2cli --mcp https://mcp.example.com/sse --list
 mcp2cli --mcp https://mcp.example.com/sse create-task --help
 mcp2cli --mcp https://mcp.example.com/sse create-task --title "Fix bug"
 
+# Xquik hosted MCP with OAuth 2.1
+mcp2cli --mcp https://xquik.com/mcp --oauth --list
+
 # MCP over stdio
 mcp2cli --mcp-stdio "npx @modelcontextprotocol/server-filesystem /tmp" --list
 mcp2cli --mcp-stdio "npx @modelcontextprotocol/server-filesystem /tmp" read-file --path /tmp/hello.txt
@@ -43,6 +46,11 @@ mcp2cli --graphql https://api.example.com/graphql --list
 mcp2cli --graphql https://api.example.com/graphql users --limit 10
 mcp2cli --graphql https://api.example.com/graphql create-user --name "Alice"
 ```
+
+The Xquik MCP source is
+[`Xquik-dev/x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper).
+
+Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
 
 ## CLI Reference
 
